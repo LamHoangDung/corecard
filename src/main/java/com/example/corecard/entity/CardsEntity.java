@@ -15,9 +15,9 @@ public class CardsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String cardNumber;
+    private String cardNumberHash;
     private String accountNumber;
-    private String cvv;
+    private String cvvHash;
     private BigDecimal creditLimit;
     private LocalDateTime createdAt;
     private LocalDate expiredDate;

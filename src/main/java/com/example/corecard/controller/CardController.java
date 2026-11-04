@@ -41,7 +41,7 @@ public class CardController {
 
     @PostMapping("/checkCoreBankingAccount")
     ResponseEntity<CheckAccountResponse> checkCoreBankingAccount(@RequestBody CardRequest cardRequest){
-        CheckAccountResponse checkAccountResponse = cardsService.checkCoreBankingAccount(cardRequest.getCardNumber(),cardRequest.getAmount());
+        CheckAccountResponse checkAccountResponse = cardsService.checkCoreBankingAccount(cardRequest.getCardNumber(),cardRequest.getCvv(),cardRequest.getAmount());
         return ResponseEntity.ok(checkAccountResponse);
     }
 }

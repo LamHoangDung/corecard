@@ -10,5 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface CardsRepository extends JpaRepository<CardsEntity,Long> {
-    CardsEntity findByCardNumber(String cardNumber);
+    CardsEntity findByCardNumberHash(String cardNumber);
+    CardsEntity findByCardNumberHashAndCvvHash(String cardNumberHash, String cvvHash);
 }
