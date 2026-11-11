@@ -1,7 +1,6 @@
 package com.example.corecard.client;
 
 import com.example.corecard.request.CryptoRequest;
-import com.example.corecard.response.CheckAccountResponse;
 import com.example.corecard.response.CryptoResponse;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,11 +19,22 @@ public class CryptoClient {
     public void init() {
         restClient = RestClient.builder().baseUrl(baseUrl).build();
     }
+
     public String hashing (CryptoRequest cryptoRequest){
         CryptoResponse response = restClient.post()
                 .uri("crypto/hash")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(cryptoRequest)
+                .retrieve()
+                .body(CryptoResponse.class);
+        return response.getResult();
+    }
+
+    public String encrypt(CryptoRequest request) {
+        CryptoResponse response = restClient.post()
+                .uri("/crypto/encrypt")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(request)
                 .retrieve()
                 .body(CryptoResponse.class);
         return response.getResult();

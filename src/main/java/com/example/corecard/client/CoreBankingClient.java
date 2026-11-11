@@ -1,9 +1,13 @@
 package com.example.corecard.client;
 
 
-import com.example.corecard.request.CheckAccountRequest;
+import com.example.corecard.request.CheckAccountExistRequest;
+import com.example.corecard.request.CheckAccountValidRequest;
+import com.example.corecard.request.InsertCardRequest;
+import com.example.corecard.response.AccountInfoResponse;
 import com.example.corecard.response.BaseResponse;
-import com.example.corecard.response.CheckAccountResponse;
+import com.example.corecard.response.CheckAccountValidResponse;
+import com.example.corecard.response.Corebank.CoreBankAccountResponse;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -23,15 +27,28 @@ public class CoreBankingClient {
         restClient = RestClient.builder().baseUrl(baseUrl).build();
     }
 
-    public CheckAccountResponse checkAccount(CheckAccountRequest request) {
-        CheckAccountResponse response = restClient.post()
-                .uri("/account/check")
+    public CheckAccountValidResponse checkAccountValid(CheckAccountValidRequest request) {
+        CheckAccountValidResponse response = restClient.post()
+                .uri("/account/checkValid")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(request)
                 .retrieve()
-                .body(CheckAccountResponse.class);
+                .body(CheckAccountValidResponse.class);
         return response;
     }
+
+
+    public CoreBankAccountResponse checkAccountExistByNameAndPhone(InsertCardRequest request){
+         CoreBankAccountResponse response = restClient.post()
+                .uri("bank/account/checkExistByNameAndPhone")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(request)
+                .retrieve()
+                .body(CoreBankAccountResponse.class);
+        return response;
+    }
+
+
 
 
 }

@@ -15,6 +15,8 @@ public class CardsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String cardNumberEncrypted;
+    private String cvvEncrypted;
     private String cardNumberHash;
     private String accountNumber;
     private String cvvHash;

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CheckAccountResponse {
+public class CheckAccountValidResponse {
     private String code;
     private boolean eligible;
     private String message;

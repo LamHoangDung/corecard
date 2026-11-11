@@ -1,11 +1,13 @@
 package com.example.corecard.controller;
 
 import com.example.corecard.request.CardRequest;
-import com.example.corecard.request.CheckAccountRequest;
+import com.example.corecard.request.CheckAccountExistRequest;
+import com.example.corecard.request.InsertCardRequest;
 import com.example.corecard.response.BaseResponse;
-import com.example.corecard.response.CheckAccountResponse;
+import com.example.corecard.response.CheckAccountValidResponse;
+import com.example.corecard.response.Corebank.CoreBankAccountResponse;
+import com.example.corecard.response.InsertCardResponse;
 import com.example.corecard.service.CardsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,8 +42,18 @@ public class CardController {
     }
 
     @PostMapping("/checkCoreBankingAccount")
-    ResponseEntity<CheckAccountResponse> checkCoreBankingAccount(@RequestBody CardRequest cardRequest){
-        CheckAccountResponse checkAccountResponse = cardsService.checkCoreBankingAccount(cardRequest.getCardNumber(),cardRequest.getCvv(),cardRequest.getAmount());
+    ResponseEntity<CheckAccountValidResponse> checkCoreBankingAccount(@RequestBody CardRequest cardRequest){
+        CheckAccountValidResponse checkAccountResponse = cardsService.checkCoreBankingAccount(cardRequest.getCardNumber(),cardRequest.getCvv(),cardRequest.getAmount());
         return ResponseEntity.ok(checkAccountResponse);
+    }
+
+    @PostMapping("checkAccountExistByNameAndPhone")
+    ResponseEntity<CoreBankAccountResponse> checkAccountExistByNameAndPhone(@RequestBody InsertCardRequest request){
+        return ResponseEntity.ok(cardsService.checkAccountExistByPhoneAndNumber(request));
+    }
+
+    @PostMapping("/insertCard")
+    public ResponseEntity<InsertCardResponse> insertCard(@RequestBody InsertCardRequest request) {
+        return ResponseEntity.ok(cardsService.insertCard(request));
     }
 }

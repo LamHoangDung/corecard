@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Setter
 @Getter
-public class CheckAccountRequest {
+public class CheckAccountValidRequest {
     private String accountNumber;
     private String customerCode;
     private BigDecimal amount;
